@@ -908,7 +908,8 @@ create_irq_cap(CDL_IRQ irq, CDL_Object *obj, seL4_CPtr free_slot)
                     obj->msiirq_extra.pci_fun, obj->msiirq_extra.handle, irq);
     } else {
 #endif
-        error = seL4_IRQControl_Get(seL4_CapIRQControl, irq, root, index, depth);
+//        error = seL4_IRQControl_Get(seL4_CapIRQControl, irq, root, index, depth);
+        error = seL4_IRQControl_GetIOAPIC(seL4_CapIRQControl, root, index, depth, 0, irq, 0, 0, irq);
 #if defined(CONFIG_ARCH_X86) && !defined(CONFIG_KERNEL_STABLE)
     }
 #endif
