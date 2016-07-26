@@ -909,7 +909,11 @@ create_irq_cap(CDL_IRQ irq, CDL_Object *obj, seL4_CPtr free_slot)
     } else {
 #endif
 //        error = seL4_IRQControl_Get(seL4_CapIRQControl, irq, root, index, depth);
-        error = seL4_IRQControl_GetIOAPIC(seL4_CapIRQControl, root, index, depth, 0, irq, 0, 0, irq);
+        if (irq < 8) {
+            error = seL4_IRQControl_GetIOAPIC(seL4_CapIRQControl, root, index, depth, 0, irq, 0, 0, irq);
+        } else {
+            error = seL4_IRQControl_GetIOAPIC(seL4_CapIRQControl, root, index, depth, 0, irq, 1, 1, irq);
+        }
 #if defined(CONFIG_ARCH_X86) && !defined(CONFIG_KERNEL_STABLE)
     }
 #endif
