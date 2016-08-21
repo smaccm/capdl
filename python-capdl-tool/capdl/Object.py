@@ -215,8 +215,13 @@ class TCB(ContainerObject):
         s += ')'
         return s
 
-    def set_fault_ep_slot(self, fault_ep_slot):
-        self.fault_ep_slot = fault_ep_slot
+    def set_fault_ep_slot(self, fault_ep_slot=0, fault_ep=None, badge=0):
+        if fault_ep_slot != 0:
+            self.fault_ep_slot = fault_ep_slot
+        if fault_ep:
+            if badge != 0:
+                fault_ep += " (badge: %d)" % badge
+            self.__setitem__("fault_ep_slot", fault_ep)
 
 class Untyped(Object):
     def __init__(self, name, size_bits=12, paddr=None):
