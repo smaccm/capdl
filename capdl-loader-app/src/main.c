@@ -940,7 +940,7 @@ create_irq_caps(CDL_Model *spec)
 
 /* Mint a cap that will not be given to the user */
 /* Used for badging fault eps in the RT kernel */
-void
+static void
 mint_cap(CDL_ObjID object_id, int free_slot, seL4_CapData_t badge)
 {
     seL4_CapRights rights = seL4_AllRights;
